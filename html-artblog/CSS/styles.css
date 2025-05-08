@@ -1,0 +1,155 @@
+body {
+	background-color: lightgray;
+	margin: 0;
+	font-family: sans-serif;
+}
+header {
+	background-color: pink;
+	padding: 1rem;
+}
+nav {
+	width: 100%;
+	background-color: lavenderblush;
+	font-size: 125%;
+	padding: 0.5rem 0;
+}
+footer {
+	color: deeppink;
+	width: auto;
+	background-color: lavenderblush;
+	padding: 1rem;
+}
+.logo {
+	width: 20rem;
+	height: 6.25rem;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 0.5rem;
+	max-width: 60rem;
+	margin: 0 auto;
+}
+.grid div {
+	text-align: center;
+}
+.grid div a {
+	width: 100%;
+	display: block;
+	padding: 0.25rem 0;
+	color: deeppink;
+}
+.grid div a:hover {
+	background-color: deeppink;
+	color: white;
+}
+section {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1rem;
+	max-width: 100rem;
+	margin: 0 auto;
+	background-color: #f1f1f1;
+	padding: 0.5rem;
+}
+article {
+	background-color: white;
+}
+article img {
+	width: 10rem;
+	height: 10rem;
+	float: right;
+	object-fit: cover;
+	object-position: top;
+}
+article h1 {
+	padding-left: 1rem;
+}
+article p {
+	padding: 0 10.5rem 0 0.5rem;
+	margin-bottom: 0.5rem;
+}
+article .datum {
+	padding: 0.5rem;
+	font-size: 0.75rem;
+	color: #606060;
+}
+article a {
+	color: deeppink;
+}
+.rows10 {
+	grid-row: span 10;
+}
+.rows11 {
+	grid-row: span 11;
+}
+.rows12 {
+	grid-row: span 12
+}
+.rows13 {
+	grid-row: span 13;
+}
+.rows14 {
+	grid-row: span 14;
+}
+.rows15 {
+	grid-row: span 15;
+}
+form {
+	max-width: 20rem;
+	margin: 0 auto;
+	background-color: #f1f1f1;
+	padding: 0.5rem;
+}
+form label {
+	font-size: 0.9rem;
+}
+form input, form textarea {
+	font-size: 1.15rem;
+    width: -webkit-fill-available;
+}
+form .submit {
+    width: auto;
+}
+form .return {
+	font-weight: bold;
+	color: deeppink;
+}
+
+@media (max-width: 80rem) { /* max 1280 px - för medelstora fönster */
+	section {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media (max-width: 50rem) { /* max 800 px - för mindre fönster */
+	section {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 35rem) { /* max 560 px - för mobiler */
+	header {
+		padding: 0.5rem;
+		text-align: center;
+	}
+	form label {
+		font-size: 1rem;
+	}
+	form input, form textarea {
+		font-size: 1.25rem;
+		width: -webkit-fill-available;
+	}
+	form .submit {
+		font-size: 1.5rem;
+		width: -webkit-fill-available;
+	}
+	.return {
+		font-size: 1.25rem;
+	}
+	.logo {
+		width: 10rem;
+		height: 3.125rem;
+	}
+	.grid {
+		grid-template-columns: 1fr;
+	}
+}
