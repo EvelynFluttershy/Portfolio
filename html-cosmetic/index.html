@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cosmetic site</title>
+	<link rel="stylesheet" href="Css/index.css">
+	<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+	<script src="JS/jquery-3.7.1.min.js"></script>
+	<script src="JS/index.js"></script>
+	<script src="JS/products.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="headerContent">
+			<h1 class="logo">Bonbon</h1>
+			<input name="search" id="search" type="text" placeholder="Sök" disabled>
+			<div class="icon" onclick="openCart()"> <!-- ---- ---- ---- -->
+				<div id="counter" style="display: none;">0</div> <!-- ---- ---- ---- -->
+				<svg height="32" width="32">
+					<image href="svg/basket.svg">
+				</svg>
+				<div>Varukorg</div> <!-- ---- ---- ---- -->
+			</div>
+		</div>
+	</header>
+	<nav>
+		<a href="index.html">Hem</a> |
+		<a href="pages/produkterna.html">Om produkterna</a> |
+		<a href="pages/omoss.html">Om oss</a> |
+		<a href="pages/kontakt.html">Kontakt</a>
+	</nav>
+	<main>
+		<aside>
+			<h3>Kategorier</h3>
+			<ul id="filters"> <!--Lista av checkbox för produkt Kategorier för filtrering --->
+				<li><input name="hud" id="hud" type="checkbox" onclick="filter()"><label for="hud">Hud</label></li> <!--input checkbox för hud Kategory -->
+				<li><input name="ögon" id="ögon" type="checkbox" onclick="filter()"><label for="ögon">Ögon</label></li> <!-- ---- ---- ---- -->
+				<li><input name="läppar" id="läppar" type="checkbox" onclick="filter()"><label for="läppar">Läppar</label></li> <!-- ---- ---- ---- -->
+				<li><input name="naglar" id="naglar" type="checkbox" onclick="filter()"><label for="naglar">Naglar</label></li> <!-- ---- ---- ---- -->
+			</ul>
+		</aside>
+		<section>
+			<div id="product_stats">0 produkter</div>
+			<div id="products">
+				<!--<div class ="product">
+					<img src="https://byminaalsheikhly.com/images/jpgs/products/vanity-case-bundle-black-1@2x.jpg">
+					<div class="name">
+						Minimalist Kit-Svart
+					</div>
+					<div class="buy">
+						<div>640 kr</div>
+						<button type="button">lägg till i varukorg</button>						
+					</div>
+			    </div>-->
+			</div>
+		</section>
+	</main>
+
+	<div id="cart" class="popup" style="display: none;">
+		<div class="popup_header">Varukorg</div>
+		<div id="cart_close" class="close" onclick="closeCart()">⤫</div>
+		<div id="cart_content" class="cart_error">Varukorgen är tom</div>
+		<div id="cart_sum">Summa: 0 kr</div>
+		<button disabled id="cart_buy" type="button" onclick="openSale()">TILL KASSAN</button>
+	</div>
+	
+	<div id="sale" class="popup" style="display: none;">
+		<div class="popup_header">Kassan</div>
+		<div id="sale_close" class="close" onclick="closeSale()">⤫</div>
+		<div id="sale_content"></div>
+		<div id="sale_cost">
+			<div><div class="sale_type">Beställningsvärde:</div><div id="sale_sum_order" class="sale_sum">0 kr</div></div>
+			<div><div class="sale_type">Fraktkostnad:</div><div id="sale_sum_ship" class="sale_sum">0 kr</div></div>
+			<div><div class="sale_type">Totalt pris:</div><div id="sale_sum_total" class="sale_sum">0 kr</div></div>
+			<div><div class="sale_type">Varav moms:</div><div id="sale_sum_vat" class="sale_sum">0 kr</div></div>
+		</div>
+		<form class="address payment">
+			<div class="popup_subheader">Adress</div>
+			<label for="addr_name">Namn</label>
+			<input type="text" id="addr_name" name="addr_name" oninput="check_input('#addr_name',false)">
+			<div id="addr_name_error" class="input_error"></div>
+			<label for="addr_co">C/o</label>
+			<input type="text" id="addr_co" name="addr_co">
+			<label for="addr_street">Gatuadress</label>
+			<input type="text" id="addr_street" name="addr_street" oninput="check_input('#addr_street',false)">
+			<div id="addr_street_error" class="input_error"></div>
+			<label for="addr_postno" id="addr_postno_label">Postnummer</label><label for="addr_city" id="addr_city_label">Postadress</label>
+			<input type="text" id="addr_postno" name="addr_postno" oninput="check_input('#addr_postno',false)"><input type="text" id="addr_city" name="addr_city" oninput="check_input('#addr_city',false)">
+			<div id="addr_postno_error" class="input_error"></div>
+			<div id="addr_city_error" class="input_error"></div>
+			<label for="addr_country">Land</label>
+			<input type="text" id="addr_country" name="addr_country" disabled value="Sverige">
+		</form>
+		<form class="card payment">
+			<div class="popup_subheader">Betalkort</div>
+			<label for="card_name">Namn</label>
+			<input type="text" id="card_name" name="card_name" oninput="check_input('#card_name',false)">
+			<div id="card_name_error" class="input_error"></div>
+			<label for="card_number">Kortnummer</label>
+			<input type="text" id="card_number" name="card_number" oninput="check_input('#card_number',false)">
+			<div id="card_number_error" class="input_error"></div>
+			<label for="card_valid" id="card_valid_label">Giltig till</label><label for="card_cvv" id="card_cvv_label">CVV/CVC</label>
+			<input type="text" id="card_valid" name="card_valid" oninput="check_input('#card_valid',false)"><input type="text" id="card_cvv" name="card_cvv" oninput="check_input('#card_cvv',false)">
+			<div id="card_valid_error" class="input_error"></div>
+			<div id="card_cvv_error" class="input_error"></div>
+		</form>
+		<button id="sale_buy" type="button" onclick="completeSale()">SLUTFÖR KÖP</button>
+	</div>
+
+	<footer>
+		<h1 class="logo">Bonbon</h1>
+		<div>Copyright &copy; 2025 - Marleen Hikmat, Evelyn Fluttershy</div>
+	</footer>
+</body>
+</html>
